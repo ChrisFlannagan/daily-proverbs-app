@@ -2,7 +2,7 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
-import App from './src/index';
+import { AppRegistry } from 'react-native';
+import App from './src/navigators';
 
-AppRegistry.registerComponent('DailyProverbs', () => App);
+AppRegistry.registerComponent('DailyProverbs', () => App );
