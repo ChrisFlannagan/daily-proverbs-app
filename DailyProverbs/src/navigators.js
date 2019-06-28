@@ -1,11 +1,13 @@
 import React from "react";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { View } from "react-native";
 
 // Screens
 import HomeScreen from 'DailyProverbs/src/components/Home';
 import ArchiveScreen from 'DailyProverbs/src/components/Archive';
-import FavoritesScreen from 'DailyProverbs/src/components/Favorites';
+import SettingsScreen from 'DailyProverbs/src/components/Settings';
 
 export const ArchiveStack = createStackNavigator(
 	{
@@ -17,14 +19,37 @@ export const ArchiveStack = createStackNavigator(
 );
 
 export const Tabbed = createMaterialBottomTabNavigator({
-	Home: { screen: HomeScreen },
-	Archives: { screen: ArchiveStack },
-	Favorites: { screen: FavoritesScreen },
+	Home: {
+		screen: HomeScreen,
+		navigationOptions: {
+			tabBarIcon: ({ tintColor }) => (
+				<Icon name="book" size={26} color={tintColor} />
+			),
+		},
+	},
+	Archives: {
+		screen: ArchiveStack,
+		navigationOptions: {
+			tabBarIcon: ({ tintColor }) => (
+				<Icon name="archive" size={26} color={tintColor} />
+			),
+		},
+	},
+	Favorites: {
+		screen: SettingsScreen,
+		navigationOptions: {
+			tabBarIcon: ({ tintColor }) => (
+				<Icon name="cog" size={26} color={tintColor} />
+			),
+		},
+	},
 }, {
-	initialRouteName: 'Home',
-	activeColor: '#f0edf6',
-	inactiveColor: '#3e2465',
-	barStyle: { backgroundColor: '#694fad' },
+	barStyle: { backgroundColor: '#32532e' },
+	activeTintColor: '#FFF',
+	inactiveTintColor: '#589252',
+	defaultNavigationOptions: {
+		labeled: false,
+	},
 });
 
 const AppContainer = createAppContainer(Tabbed);

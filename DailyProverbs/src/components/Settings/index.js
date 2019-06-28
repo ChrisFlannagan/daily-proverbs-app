@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export default class FavoritesScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
 	render() {
 		return (
 			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<Text>Favorites Screen</Text>
+				<Text>Settings Screen</Text>
 			</View>
 		);
 	}
