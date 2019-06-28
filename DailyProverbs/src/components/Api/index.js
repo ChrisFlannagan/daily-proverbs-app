@@ -1,6 +1,5 @@
 import React from 'react';
 import {ActivityIndicator, Text, View, ScrollView} from 'react-native';
-import { WebView } from 'react-native-webview';
 
 // Constants
 import Colors from 'DailyProverbs/src/colors.js';
@@ -31,7 +30,6 @@ export default class Api extends React.Component {
 		});
 	}
 
-
 	render() {
 		if (this.state.isLoading) {
 			return (
@@ -46,14 +44,10 @@ export default class Api extends React.Component {
 		striphtml = striphtml.replace( /(<([^>]+)>)/ig, '' );
 		console.log(striphtml);
 		return (
-			<View style={{ flex: 1, paddingTop: 20 }}>
-				<Text style={{ height: 200, fontSize: 30, fontWeight: 'bold' }}>{this.state.dataSource[0].title.rendered}</Text>
-				<ScrollView style={{ flex: 1 }}>
-					<WebView
-						originWhitelist={['*']}
-						source={{ html: striphtml  }} />
-				</ScrollView>
-			</View>
+			<ScrollView style={{ flex: 1, padding: 20 }}>
+				<Text style={{ paddingBottom: 20, fontSize: 30, fontWeight: 'bold' }}>{this.state.dataSource[0].title.rendered}</Text>
+				<Text style={{ fontSize: 20, fontWeight: 'bold', color: Colors.grey }}>{striphtml}</Text>
+			</ScrollView>
 		);
 	}
 }
