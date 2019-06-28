@@ -2,12 +2,14 @@ import React from "react";
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { View } from "react-native";
 
 // Screens
 import HomeScreen from 'DailyProverbs/src/components/Home';
 import ArchiveScreen from 'DailyProverbs/src/components/Archive';
 import SettingsScreen from 'DailyProverbs/src/components/Settings';
+
+// Constants
+import Colors from 'DailyProverbs/src/colors.js';
 
 export const ArchiveStack = createStackNavigator(
 	{
@@ -44,9 +46,9 @@ export const Tabbed = createMaterialBottomTabNavigator({
 		},
 	},
 }, {
-	barStyle: { backgroundColor: '#32532e' },
-	activeTintColor: '#FFF',
-	inactiveTintColor: '#589252',
+	barStyle: { backgroundColor: Colors.darkGreen },
+	activeTintColor: Colors.white,
+	inactiveTintColor: Colors.lightGreen,
 	defaultNavigationOptions: {
 		labeled: false,
 	},

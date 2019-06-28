@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cbe535e-5f36-4fa5-a4e8-62d5e2dcd2c5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/DailyProverbs/src/colors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DailyProverbs/src/components/Api/Vars.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DailyProverbs/src/components/Api/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DailyProverbs/src/components/Favorites/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/src/components/Settings/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/android/app/src/main/java/com/dailyproverbs/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/android/app/src/main/java/com/dailyproverbs/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/ios/DailyProverbs.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/ios/DailyProverbs.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DailyProverbs/src/navigators.js" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/src/navigators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DailyProverbs/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/DailyProverbs/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,14 +29,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DailyProverbs/src/navigators.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-334">
-              <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+            <state relative-caret-position="234">
+              <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#260#319#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DailyProverbs/src/colors.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Api/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1122">
+              <caret line="55" column="19" lean-forward="true" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#103#152#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Api/Vars.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="1" column="54" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -51,12 +105,16 @@
         <option value="$PROJECT_DIR$/DailyProverbs/src/components/Archive/index.js" />
         <option value="$PROJECT_DIR$/DailyProverbs/src/components/Favorites/index.js" />
         <option value="$PROJECT_DIR$/DailyProverbs/src/index.js" />
-        <option value="$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js" />
         <option value="$PROJECT_DIR$/DailyProverbs/index.js" />
         <option value="$PROJECT_DIR$/DailyProverbs/node_modules/react-navigation-material-bottom-tabs/src/navigators/createMaterialBottomTabNavigator.js" />
         <option value="$PROJECT_DIR$/DailyProverbs/node_modules/react-navigation-tabs/src/views/BottomTabBar.js" />
-        <option value="$PROJECT_DIR$/DailyProverbs/src/navigators.js" />
         <option value="$PROJECT_DIR$/DailyProverbs/src/components/Settings/index.js" />
+        <option value="$PROJECT_DIR$/DailyProverbs/src/components/Api/Vars.php" />
+        <option value="$PROJECT_DIR$/DailyProverbs/src/components/Api/Vars.js" />
+        <option value="$PROJECT_DIR$/DailyProverbs/src/navigators.js" />
+        <option value="$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js" />
+        <option value="$PROJECT_DIR$/DailyProverbs/src/colors.js" />
+        <option value="$PROJECT_DIR$/DailyProverbs/src/components/Api/index.js" />
       </list>
     </option>
   </component>
@@ -64,9 +122,9 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="73" />
-    <option name="y" value="42" />
-    <option name="width" value="2355" />
+    <option name="x" value="149" />
+    <option name="y" value="36" />
+    <option name="width" value="2238" />
     <option name="height" value="1365" />
   </component>
   <component name="ProjectView">
@@ -92,29 +150,6 @@
               <item name="daily-proverbs" type="462c0819:PsiDirectoryNode" />
               <item name="DailyProverbs" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daily-proverbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daily-proverbs" type="462c0819:PsiDirectoryNode" />
-              <item name="DailyProverbs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daily-proverbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daily-proverbs" type="462c0819:PsiDirectoryNode" />
-              <item name="DailyProverbs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Archive" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="daily-proverbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="daily-proverbs" type="462c0819:PsiDirectoryNode" />
-              <item name="DailyProverbs" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Settings" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -160,18 +195,18 @@
       <workItem from="1561512399638" duration="5892000" />
       <workItem from="1561553204249" duration="5000" />
       <workItem from="1561597060899" duration="4626000" />
-      <workItem from="1561675657282" duration="4280000" />
+      <workItem from="1561675657282" duration="8800000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14803000" />
+    <option name="totallyTimeSpent" value="19323000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="42" width="2355" height="1365" extended-state="0" />
+    <frame x="149" y="36" width="2238" height="1365" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15261565" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16074681" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" />
@@ -255,13 +290,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DailyProverbs/src/index.js" />
-    <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DailyProverbs/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -344,12 +372,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Api/Vars.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="54" selection-start-line="1" selection-start-column="54" selection-end-line="1" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DailyProverbs/src/colors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DailyProverbs/src/navigators.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-334">
-          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+        <state relative-caret-position="234">
+          <caret line="9" selection-start-line="9" selection-end-line="11" selection-end-column="49" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#260#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Home/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DailyProverbs/src/components/Api/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="55" column="19" lean-forward="true" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#103#152#0" expanded="true" />
           </folding>
         </state>
       </provider>
