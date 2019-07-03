@@ -3,4 +3,6 @@ export default {
 	white: '#fff',
 	darkGreen: '#32532e',
 	lightGreen: '#589252',
+	favGold: '#d9ba24',
+	favDarkGold: '#917e1f',
 }
