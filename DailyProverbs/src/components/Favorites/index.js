@@ -9,32 +9,21 @@ const categories = [
 	{ title: 'Other', key: 'other' },
 ];
 
-export function onPressLearnMore() {
-	console.log("saving: ");
-	console.log(this.props);
-}
-
-export class ListItem extends React.Component {
-	render() {
-		return (
-			<Button
-				onPress={onPressLearnMore.bind(this)}
-				title={this.props.title}
-				color="#841584"
-			/>
-		);
-	}
-}
-
 export default class FavoritesScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		const { navigation } = this.props;
+		this.addToFavorites = this.addToFavorites.bind(this);
 		this.state = {
 			add: navigation.getParam( 'add', false ) ,
 			proverbId: navigation.getParam( 'proverbId', 0 ),
 			proverbTitle: navigation.getParam( 'proverbTitle', 0 ),
 		}
+	}
+
+	addToFavorites() {
+		console.log("saving: ");
+		console.log(this.state.proverbTitle);
 	}
 
 	render() {
@@ -44,8 +33,8 @@ export default class FavoritesScreen extends React.Component {
 					<Text>Add {this.state.proverbTitle} To Favorites Category</Text>
 					<FlatList
 					data={categories}
-					renderItem={({item}) => <ListItem title={item.title} proverbId={this.state.proverbId} proverbTitle={this.state.proverbTitle} />}
-					/>
+					renderItem={({item}) => <Button onPress={this.addToFavorites} title={item.title}/>}
+						/>
 				</View>
 			)
 		}
