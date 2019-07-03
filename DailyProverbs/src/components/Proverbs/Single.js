@@ -16,9 +16,9 @@ export default class Single extends React.Component {
 		super(props);
 		this.state = { isLoading: true }
 		retrieve().then((text) => {
-			console.log("The text: " + text);
+				console.log("The text: " + text);
 				this.setState({
-					isLoading:  false,
+					isLoading: false,
 					dataSource: text,
 				});
 			},
@@ -36,9 +36,8 @@ export default class Single extends React.Component {
 			)
 		}
 
-		let striphtml = this.state.dataSource[0].content.rendered;
-		striphtml = striphtml.replace( '<p>', "\n\n" );
-		striphtml = striphtml.replace( /(<([^>]+)>)/ig, '' );
+		let title = trim(stripTags(unescapeHTML(this.state.dataSource[0].title.rendered)));
+		let content = trim(stripTags(unescapeHTML(this.state.dataSource[0].content.rendered)));
 		return (
 			<View style={{ flex: 1 }}>
 				<View style={{ padding: 20 }}>
@@ -49,11 +48,23 @@ export default class Single extends React.Component {
 							Add To Favorites
 						</Text>
 					</Icon.Button>
-					<Text style={{ paddingTop: 10, fontSize: 50, fontFamily: 'Bradley Hand', fontWeight: 'bold' }}>{trim(stripTags(unescapeHTML(this.state.dataSource[0].title.rendered)))}</Text>
+					<Text style={{
+						paddingTop: 10,
+						fontSize:   50,
+						fontFamily: 'Bradley Hand',
+						fontWeight: 'bold'
+					}}>{title}</Text>
 				</View>
-				<LinearGradient colors={['#acacac', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#acacac']} style={{ flex: 1, paddingLeft: 20, paddingRight: 20 }}>
+				<LinearGradient
+					colors={ Colors.topBottomGray }
+					style={{ flex: 1, paddingLeft: 20, paddingRight: 20 }}>
 					<ScrollView style={{ flex: 1 }}>
-						<Text style={{ fontSize: 25, lineHeight: 35, color: Colors.grey }}>{striphtml}</Text>
+						<Text style={{
+							paddingTop: 10,
+							fontSize:   25,
+							lineHeight: 35,
+							color:      Colors.grey
+						}}>{content}</Text>
 					</ScrollView>
 				</LinearGradient>
 			</View>

@@ -5,4 +5,6 @@ export default {
 	lightGreen: '#589252',
 	favGold: '#d9ba24',
 	favDarkGold: '#917e1f',
+	// gradients
+	topBottomGray: ['#CCCCCC', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#CCCCCC'],
 }
