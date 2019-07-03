@@ -1,9 +1,9 @@
 import React from "react";
-import {View} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Header } from 'react-native-elements';
+import Icon2 from 'react-native-vector-icons/Entypo';
 
 // Screens
 import Single from 'DailyProverbs/src/components/Proverbs/Single';
@@ -14,10 +14,32 @@ import SettingsScreen from 'DailyProverbs/src/components/Settings';
 // Constants
 import Colors from 'DailyProverbs/src/colors.js';
 
+class IconTitle extends React.Component {
+	render() {
+		return (
+			<Text style={{
+				paddingLeft: 8,
+				width: 100,
+				flex: 1,
+				flexDirection: 'row',
+				alignItems: 'center',
+				textAlign: 'center',
+				justifyContent: 'flex-start'
+			}}>
+				<Icon2 name="feather" size={26} style={{ color: Colors.white }}/>
+				<Text style={{ color: Colors.white, fontSize: 18 }}>Daily Proverbs</Text>
+			</Text>
+		);
+	}
+}
+
 const baseNavigationOptions = {
-	headerTitle: 'Daily Proverbs',
-	headerTitleStyle: { color: Colors.white },
-	headerStyle: { backgroundColor: Colors.darkGreen },
+	headerTitle:      <IconTitle/>,
+	headerStyle:      { backgroundColor: Colors.darkGreen },
+	headerBackTitleStyle: {
+		color: 'white',
+	},
+	headerTintColor: 'white',
 };
 
 export const ArchiveStack = createStackNavigator(
@@ -34,7 +56,7 @@ export const ArchiveStack = createStackNavigator(
 
 export const HomeStack = createStackNavigator(
 	{
-		Single: Single,
+		Single:    Single,
 		Favorites: FavoritesScreen,
 	},
 	{
@@ -47,7 +69,7 @@ export const HomeStack = createStackNavigator(
 
 export const Tabbed = createMaterialBottomTabNavigator({
 	Home:      {
-		screen: HomeStack,
+		screen:            HomeStack,
 		navigationOptions: {
 			tabBarIcon: ({ tintColor }) => (
 				<Icon name="book" size={26} color={tintColor}/>
