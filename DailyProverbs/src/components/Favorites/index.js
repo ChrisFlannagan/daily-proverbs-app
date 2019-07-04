@@ -1,40 +1,63 @@
 import React from "react";
-import { View, Text, FlatList, Button } from "react-native";
-
-const categories = [
-	{ title: 'Spiritual', key: 'spiritual' },
-	{ title: 'Uplifting', key: 'uplifting' },
-	{ title: 'Motivational', key: 'motivational' },
-	{ title: 'Peaceful', key: 'peaceful' },
-	{ title: 'Other', key: 'other' },
-];
+import {ActivityIndicator, View, Text, FlatList, SectionList, Button} from "react-native";
+import {addFavorite, getParsedFavorites, getFavorites, categories} from '../../storage';
+import Colors from '../../colors';
 
 export default class FavoritesScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		const { navigation } = this.props;
+
 		this.addToFavorites = this.addToFavorites.bind(this);
+		this.setFavorites = this.setFavorites.bind(this);
+
+		this.favorites = [];
 		this.state = {
-			add: navigation.getParam( 'add', false ) ,
-			proverbId: navigation.getParam( 'proverbId', 0 ),
-			proverbTitle: navigation.getParam( 'proverbTitle', 0 ),
+			add:          navigation.getParam('add', false),
+			isLoading:    true,
+			proverbId:    navigation.getParam('proverbId', 0),
+			proverbTitle: navigation.getParam('proverbTitle', 0),
 		}
 	}
 
-	addToFavorites() {
-		console.log("saving: ");
-		console.log(this.state.proverbTitle);
+	componentDidMount() {
+		this.setFavorites();
+	}
+
+	async addToFavorites(event, category) {
+		addFavorite(this.state.proverbId, this.state.proverbTitle, category);
+		this.setState({ add: false });
+	}
+
+	async setFavorites() {
+		await getParsedFavorites()
+		.then((favorites) => {
+			this.favorites = favorites;
+			this.setState({ isLoading: false });
+		})
+		.catch((error) => {
+			console.error(error);
+		});
 	}
 
 	render() {
-		if ( this.state.add ) {
+		if (this.state.add) {
 			return (
 				<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 					<Text>Add {this.state.proverbTitle} To Favorites Category</Text>
 					<FlatList
-					data={categories}
-					renderItem={({item}) => <Button onPress={this.addToFavorites} title={item.title}/>}
-						/>
+						data={categories}
+						renderItem={({ item }) => <Button onPress={(event) => this.addToFavorites(event, item.key)}
+						                                  title={item.title} key={item.key}/>}
+					/>
+				</View>
+			)
+		}
+
+		if (this.state.isLoading) {
+			return (
+				<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
+					<ActivityIndicator size="large" color={Colors.lightGreen}/>
 				</View>
 			)
 		}
@@ -42,6 +65,14 @@ export default class FavoritesScreen extends React.Component {
 		return (
 			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 				<Text>Favorites Screen</Text>
+				<SectionList
+					renderItem={({item, index, section}) => <Text key={index}>{item.label}</Text>}
+					renderSectionHeader={({section: {title}}) => (
+						<Text style={{fontWeight: 'bold'}}>{title}</Text>
+					)}
+					sections={this.favorites}
+					keyExtractor={(item, index) => item.id + index}
+				/>
 			</View>
 		);
 	}

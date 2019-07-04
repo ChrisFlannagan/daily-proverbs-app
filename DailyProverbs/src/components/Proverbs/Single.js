@@ -37,7 +37,7 @@ export default class Single extends React.Component {
 				                 resizeMode='cover'
 				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
 					<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
-						<ActivityIndicator size="large" color={Colors.lightGreen}/>
+						<ActivityIndicator size="large" color={Colors.white}/>
 					</View>
 				</ImageBackground>
 			)
