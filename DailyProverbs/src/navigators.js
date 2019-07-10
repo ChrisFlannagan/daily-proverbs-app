@@ -63,6 +63,7 @@ export const HomeStack = createStackNavigator(
 		initialRouteName: 'Single',
 		defaultNavigationOptions: {
 			...baseNavigationOptions,
+			page: 1,
 		}
 	}
 );

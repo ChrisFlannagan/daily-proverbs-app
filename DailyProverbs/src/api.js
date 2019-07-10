@@ -1,23 +1,17 @@
 import Vars from './components/Api/Vars';
 
 export function retrieve(options) {
-	let numberposts = 1;
-	let page = 1;
+	let buildUrl = Vars.URL + '?page=' + options.page + '&per_page=' + options.numberposts;
 
-	if(options.numberposts.length) {
-		numberposts = options.numberposts;
-	}
-
-	if(options.page.length) {
-		page = options.page;
-	}
-
-	let buildUrl = Vars.URL + '?page=' + page + '&per_page=' + numberposts;
-
+	console.log(buildUrl);
 	return fetch(buildUrl)
 	.then((response) => {
 		return response.text().then((text) => {
-			return JSON.parse(text);
+			const data = JSON.parse(text);
+			return {
+				text: data,
+				totalPages: response.headers.get('x-wp-totalpages'),
+			};
 		})
 	})
 	.catch((error) => {

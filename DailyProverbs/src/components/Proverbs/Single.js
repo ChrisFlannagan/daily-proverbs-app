@@ -14,11 +14,34 @@ export default class Single extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = { isLoading: true }
-		retrieve({ numberposts: 1, page: 1 }).then((text) => {
+		const { navigation } = this.props;
+		this.state = {
+			isLoading:  true,
+			page:       (navigation.getParam('page', 1) - 1),
+			totalPages: 1,
+		};
+	}
+
+	componentDidMount() {
+		this.prevProverb();
+	}
+
+	prevProverb() {
+		let nextPage = this.state.page + 1;
+		this.setState({isLoading: true});
+
+		retrieve({ numberposts: 1, page: nextPage }).then((data) => {
+				let displayNextBtn = 'flex';
+				if (nextPage === parseInt(data.totalPages)) {
+					displayNextBtn = 'none';
+				}
+
 				this.setState({
 					isLoading:  false,
-					dataSource: text,
+					dataSource: data.text,
+					totalPages: data.totalPages,
+					displayNextBtn: displayNextBtn,
+					page: nextPage,
 				});
 			},
 		);
@@ -56,20 +79,21 @@ export default class Single extends React.Component {
 				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
 					<View style={{ padding: 20 }}>
 						<Icon.Button
-							onPress={() => navigate('Favorites', { add: true, proverbId: id, proverbTitle: title })} name="star-o"
+							onPress={() => navigate('Favorites', { add: true, proverbId: id, proverbTitle: title })}
+							name="star-o"
 							backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
 							<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
 								Add To Favorites
 							</Text>
 						</Icon.Button>
 						<Text style={{
-							color: Colors.white,
-							paddingTop: 10,
-							fontSize:   50,
-							fontFamily: 'Bradley Hand',
-							fontWeight: 'bold',
-							textShadowColor: 'rgba(0, 0, 0, 1)',
-							textShadowOffset: {width: -1, height: 2},
+							color:            Colors.white,
+							paddingTop:       10,
+							fontSize:         50,
+							fontFamily:       'Bradley Hand',
+							fontWeight:       'bold',
+							textShadowColor:  'rgba(0, 0, 0, 1)',
+							textShadowOffset: { width: -1, height: 2 },
 							textShadowRadius: 5
 						}}>{title}</Text>
 					</View>
@@ -84,6 +108,15 @@ export default class Single extends React.Component {
 							lineHeight: 35,
 							color:      Colors.grey
 						}}>{content}</Text>
+						<View style={{ padding: 20, display: this.state.displayNextBtn }}>
+							<Icon.Button
+								onPress={() => this.prevProverb()} name="chevron-right"
+								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+									Previous Proverb
+								</Text>
+							</Icon.Button>
+						</View>
 					</ScrollView>
 				</LinearGradient>
 			</View>
