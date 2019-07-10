@@ -68,7 +68,13 @@ export default class FavoritesScreen extends React.Component {
 				<SectionList
 					renderItem={({item, index, section}) => <Text key={index}>{item.label}</Text>}
 					renderSectionHeader={({section: {title}}) => (
-						<Text style={{fontWeight: 'bold'}}>{title}</Text>
+						<Text style={{
+							fontWeight: 'bold',
+							backgroundColor: Colors.favDarkGold,
+							color: Colors.white,
+							width: '100%',
+							padding: 20,
+						}}>{title}</Text>
 					)}
 					sections={this.favorites}
 					keyExtractor={(item, index) => item.id + index}

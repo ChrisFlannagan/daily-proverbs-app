@@ -28,7 +28,7 @@ export default class Single extends React.Component {
 
 	prevProverb() {
 		let nextPage = this.state.page + 1;
-		this.setState({isLoading: true});
+		this.setState({ isLoading: true });
 
 		retrieve({ numberposts: 1, page: nextPage }).then((data) => {
 				let displayNextBtn = 'flex';
@@ -37,11 +37,11 @@ export default class Single extends React.Component {
 				}
 
 				this.setState({
-					isLoading:  false,
-					dataSource: data.text,
-					totalPages: data.totalPages,
+					isLoading:      false,
+					dataSource:     data.text,
+					totalPages:     data.totalPages,
 					displayNextBtn: displayNextBtn,
-					page: nextPage,
+					page:           nextPage,
 				});
 			},
 		);
@@ -78,12 +78,23 @@ export default class Single extends React.Component {
 				                 resizeMode='cover'
 				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
 					<View style={{ padding: 20 }}>
-						<Icon.Button
-							onPress={() => navigate('Favorites', { add: true, proverbId: id, proverbTitle: title })}
-							name="star-o"
-							backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+						<Icon.Button onPress={() => navigate('Favorites', {
+							             add:          true,
+							             proverbId:    id,
+							             proverbTitle: title
+						             })}
+						             name="star-o"
+						             backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
 							<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
 								Add To Favorites
+							</Text>
+						</Icon.Button>
+						<Text style={{height: 10 }} />
+						<Icon.Button onPress={() => navigate('Favorites')}
+						             name="star"
+						             backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+							<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+								View Favorites
 							</Text>
 						</Icon.Button>
 						<Text style={{
