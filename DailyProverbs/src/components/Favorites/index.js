@@ -1,7 +1,8 @@
 import React from "react";
-import {ActivityIndicator, View, Text, FlatList, SectionList, Button} from "react-native";
+import {ActivityIndicator, View, Text, FlatList, SectionList, Button, ImageBackground} from "react-native";
 import {addFavorite, getParsedFavorites, getFavorites, categories} from '../../storage';
 import Colors from '../../colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class FavoritesScreen extends React.Component {
 	constructor(props) {
@@ -56,24 +57,56 @@ export default class FavoritesScreen extends React.Component {
 
 		if (this.state.isLoading) {
 			return (
-				<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
-					<ActivityIndicator size="large" color={Colors.lightGreen}/>
-				</View>
+				<ImageBackground style={{
+					width:  '100%',
+					height: '100%',
+					flex:   1
+				}}
+				                 resizeMode='cover'
+				                 source={require('./ocean-sunset.jpg')}>
+					<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
+						<ActivityIndicator size="large" color={Colors.white}/>
+					</View>
+				</ImageBackground>
 			)
 		}
 
 		return (
-			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<Text>Favorites Screen</Text>
-				<SectionList
-					renderItem={({item, index, section}) => <Text key={index}>{item.label}</Text>}
+			<View style={{ flex: 1 }}>
+				<ImageBackground style={{
+					width:  '100%',
+					height: 'auto',
+				}}
+				                 resizeMode='cover'
+				                 source={require('./ocean-sunset.jpg')}>
+					<View style={{ padding: 20 }}>
+						<Text style={{
+							color:            Colors.white,
+							paddingTop:       10,
+							fontSize:         50,
+							fontFamily:       'Bradley Hand',
+							fontWeight:       'bold',
+							textShadowColor:  'rgba(0, 0, 0, 1)',
+							textShadowOffset: { width: -1, height: 2 },
+							textShadowRadius: 5
+						}}>Favorites</Text>
+					</View>
+				</ImageBackground>
+				<SectionList style={{ width: '100%' }}
+					renderItem={({item, index, section}) => (
+						<Text key={index} style={{
+							fontSize: 18,
+							padding: 10
+						}}>{item.label}</Text>
+					)}
 					renderSectionHeader={({section: {title}}) => (
 						<Text style={{
 							fontWeight: 'bold',
 							backgroundColor: Colors.favDarkGold,
 							color: Colors.white,
 							width: '100%',
-							padding: 20,
+							padding: 10,
+							fontSize: 20,
 						}}>{title}</Text>
 					)}
 					sections={this.favorites}

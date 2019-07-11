@@ -22,6 +22,11 @@ export const getFavorites = async () => {
 };
 
 export const getParsedFavorites = async() => {
+	const capitalize = (s) => {
+		if (typeof s !== 'string') return '';
+		return s.charAt(0).toUpperCase() + s.slice(1)
+	};
+
 	let favorites = await getFavorites();
 	let parsedFavorites = [];
 	let sectionedData = [];
@@ -46,7 +51,7 @@ export const getParsedFavorites = async() => {
 			});
 
 			sectionedData.push({
-				title: category.key,
+				title: capitalize(category.key),
 				data: data,
 			});
 		}
@@ -56,17 +61,25 @@ export const getParsedFavorites = async() => {
 };
 
 export async function addFavorite( proverbId, label, category ) {
+	let saved = false;
 	let favorites = await getFavorites();
-	let newFavorite = {
-		id: proverbId,
-		label: label,
-		category: category,
-	};
+	favorites.map((favorite) => {
+		if (Number(proverbId) === Number(favorite.id)) {
+			saved = true;
+		}
+	});
+	if (!saved) {
+		let newFavorite = {
+			id:       proverbId,
+			label:    label,
+			category: category,
+		};
 
-	favorites = [ ...favorites, newFavorite ];
-	try {
-		await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-	} catch (error) {
-		console.error(error.message);
+		favorites = [...favorites, newFavorite];
+		try {
+			await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+		} catch (error) {
+			console.error(error.message);
+		}
 	}
 }
