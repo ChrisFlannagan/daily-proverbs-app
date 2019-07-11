@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../colors';
 
 // functions & libraries
-import {retrieve} from '../../api';
+import {retrieve, retrieveById} from '../../api';
 import stripTags from 'underscore.string/stripTags';
 import trim from 'underscore.string/trim';
 import unescapeHTML from 'underscore.string/unescapeHTML';
@@ -16,6 +16,7 @@ export default class Single extends React.Component {
 		super(props);
 		const { navigation } = this.props;
 		this.state = {
+			proverbId:  navigation.getParam('proverbId', 0),
 			isLoading:  true,
 			page:       (navigation.getParam('page', 1) - 1),
 			totalPages: 1,
@@ -30,21 +31,33 @@ export default class Single extends React.Component {
 		let nextPage = this.state.page + 1;
 		this.setState({ isLoading: true });
 
-		retrieve({ numberposts: 1, page: nextPage }).then((data) => {
-				let displayNextBtn = 'flex';
-				if (nextPage === parseInt(data.totalPages)) {
-					displayNextBtn = 'none';
-				}
+		if (this.state.proverbId === 0) {
+			retrieve({ numberposts: 1, page: nextPage }).then((data) => {
+					let displayNextBtn = 'flex';
+					if (nextPage === parseInt(data.totalPages)) {
+						displayNextBtn = 'none';
+					}
 
+					this.setState({
+						isLoading:      false,
+						dataSource:     data.text,
+						totalPages:     data.totalPages,
+						displayNextBtn: displayNextBtn,
+						page:           nextPage,
+					});
+				},
+			);
+		} else {
+			retrieveById({ proverbId: this.state.proverbId }).then((data) => {
+				console.log(data.text);
 				this.setState({
 					isLoading:      false,
 					dataSource:     data.text,
 					totalPages:     data.totalPages,
-					displayNextBtn: displayNextBtn,
-					page:           nextPage,
+					displayNextBtn: 'none',
 				});
-			},
-		);
+			});
+		}
 	}
 
 	render() {
@@ -66,9 +79,18 @@ export default class Single extends React.Component {
 			)
 		}
 
-		let id = Number(this.state.dataSource[0].id);
-		let title = trim(stripTags(unescapeHTML(this.state.dataSource[0].title.rendered)));
-		let content = trim(stripTags(unescapeHTML(this.state.dataSource[0].content.rendered)));
+		let postData;
+		let favButtonsDisplay = 'flex';
+		if (typeof this.state.dataSource[0] === 'undefined') {
+			favButtonsDisplay = 'none';
+			postData = this.state.dataSource;
+		} else {
+			postData = this.state.dataSource[0];
+		}
+
+		let id = Number(postData.id);
+		let title = trim(stripTags(unescapeHTML(postData.title.rendered)));
+		let content = trim(stripTags(unescapeHTML(postData.content.rendered)));
 		return (
 			<View style={{ flex: 1 }}>
 				<ImageBackground style={{
@@ -78,21 +100,25 @@ export default class Single extends React.Component {
 				                 resizeMode='cover'
 				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
 					<View style={{ padding: 20 }}>
-						<Icon.Button onPress={() => navigate('Favorites', {
-							             add:          true,
-							             proverbId:    id,
-							             proverbTitle: title
-						             })}
-						             name="star-o"
-						             backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+						<Icon.Button
+							style={{ display: favButtonsDisplay }}
+							onPress={() => navigate('Favorites', {
+								add:          true,
+								proverbId:    id,
+								proverbTitle: title
+							})}
+							name="star-o"
+							backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
 							<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
 								Add To Favorites
 							</Text>
 						</Icon.Button>
-						<Text style={{height: 10 }} />
-						<Icon.Button onPress={() => navigate('Favorites')}
-						             name="star"
-						             backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+						<Text style={{ height: 10 }}/>
+						<Icon.Button
+							style={{ display: favButtonsDisplay }}
+							onPress={() => navigate('Favorites')}
+							name="star"
+							backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
 							<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
 								View Favorites
 							</Text>

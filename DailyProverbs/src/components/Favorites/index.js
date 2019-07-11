@@ -42,6 +42,8 @@ export default class FavoritesScreen extends React.Component {
 	}
 
 	render() {
+		const { navigate } = this.props.navigation;
+
 		if (this.state.add) {
 			return (
 				<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -93,24 +95,31 @@ export default class FavoritesScreen extends React.Component {
 					</View>
 				</ImageBackground>
 				<SectionList style={{ width: '100%' }}
-					renderItem={({item, index, section}) => (
-						<Text key={index} style={{
-							fontSize: 18,
-							padding: 10
-						}}>{item.label}</Text>
-					)}
-					renderSectionHeader={({section: {title}}) => (
-						<Text style={{
-							fontWeight: 'bold',
-							backgroundColor: Colors.favDarkGold,
-							color: Colors.white,
-							width: '100%',
-							padding: 10,
-							fontSize: 20,
-						}}>{title}</Text>
-					)}
-					sections={this.favorites}
-					keyExtractor={(item, index) => item.id + index}
+				             renderItem={({ item, index, section }) => (
+					             <Text key={index}
+					                   onPress={() => navigate('Single', {
+						                   proverbId: item.id,
+					                   })}
+					                   onLongPress={() => {
+
+					                   }}
+					                   style={{
+						                   fontSize: 18,
+						                   padding:  10
+					                   }}>{item.label}</Text>
+				             )}
+				             renderSectionHeader={({ section: { title } }) => (
+					             <Text style={{
+						             fontWeight:      'bold',
+						             backgroundColor: Colors.favDarkGold,
+						             color:           Colors.white,
+						             width:           '100%',
+						             padding:         10,
+						             fontSize:        20,
+					             }}>{title}</Text>
+				             )}
+				             sections={this.favorites}
+				             keyExtractor={(item, index) => item.id + index}
 				/>
 			</View>
 		);

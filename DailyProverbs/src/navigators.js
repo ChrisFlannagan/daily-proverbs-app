@@ -60,7 +60,7 @@ export const HomeStack = createStackNavigator(
 		Favorites: FavoritesScreen,
 	},
 	{
-		initialRouteName: 'Single',
+		initialRouteName: 'Favorites',
 		defaultNavigationOptions: {
 			...baseNavigationOptions,
 			page: 1,
