@@ -68,6 +68,7 @@ export async function addFavorite( proverbId, label, category ) {
 			saved = true;
 		}
 	});
+
 	if (!saved) {
 		let newFavorite = {
 			id:       proverbId,
@@ -81,5 +82,21 @@ export async function addFavorite( proverbId, label, category ) {
 		} catch (error) {
 			console.error(error.message);
 		}
+	}
+}
+
+export async function deleteFavorite( proverbId ) {
+	let favorites = await getFavorites();
+	let newFavorites = [];
+	favorites.map((favorite) => {
+		if (Number(proverbId) !== Number(favorite.id)) {
+			newFavorites.push(favorite);
+		}
+	});
+
+	try {
+		await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newFavorites));
+	} catch (error) {
+		console.error(error.message);
 	}
 }
