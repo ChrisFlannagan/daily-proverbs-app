@@ -2,6 +2,7 @@ import React from "react";
 import {ActivityIndicator, ScrollView, Text, View, ImageBackground} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../colors';
+import {getFavorites} from '../../storage';
 
 // functions & libraries
 import {retrieve, retrieveById} from '../../api';
@@ -20,6 +21,9 @@ export default class Single extends React.Component {
 			isLoading:  true,
 			page:       (navigation.getParam('page', 1) - 1),
 			totalPages: 1,
+			favorites: [],
+			viewFavsDisplay: 'flex',
+			addFavDisplay: 'flex',
 		};
 	}
 
@@ -27,9 +31,16 @@ export default class Single extends React.Component {
 		this.prevProverb();
 	}
 
-	prevProverb() {
-		let nextPage = this.state.page + 1;
+	async prevProverb() {
 		this.setState({ isLoading: true });
+
+		let nextPage = this.state.page + 1;
+		let favorites = await getFavorites();
+		let favoritesIds = [];
+		favorites.map((favorite) => {
+			favoritesIds.push(favorite.id);
+		});
+		this.setState({favorites: favoritesIds});
 
 		if (this.state.proverbId === 0) {
 			retrieve({ numberposts: 1, page: nextPage }).then((data) => {
@@ -49,7 +60,6 @@ export default class Single extends React.Component {
 			);
 		} else {
 			retrieveById({ proverbId: this.state.proverbId }).then((data) => {
-				console.log(data.text);
 				this.setState({
 					isLoading:      false,
 					dataSource:     data.text,
@@ -80,9 +90,9 @@ export default class Single extends React.Component {
 		}
 
 		let postData;
-		let favButtonsDisplay = 'flex';
+		let viewFavsDisplay = 'flex';
 		if (typeof this.state.dataSource[0] === 'undefined') {
-			favButtonsDisplay = 'none';
+			viewFavsDisplay = 'none';
 			postData = this.state.dataSource;
 		} else {
 			postData = this.state.dataSource[0];
@@ -91,6 +101,14 @@ export default class Single extends React.Component {
 		let id = Number(postData.id);
 		let title = trim(stripTags(unescapeHTML(postData.title.rendered)));
 		let content = trim(stripTags(unescapeHTML(postData.content.rendered)));
+
+		let addFavsDisplay = 'flex';
+		this.state.favorites.map((favorite) => {
+			if (id === Number(favorite)) {
+				addFavsDisplay = 'none';
+			}
+		});
+
 		return (
 			<View style={{ flex: 1 }}>
 				<ImageBackground style={{
@@ -101,7 +119,7 @@ export default class Single extends React.Component {
 				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
 					<View style={{ padding: 20 }}>
 						<Icon.Button
-							style={{ display: favButtonsDisplay }}
+							style={{ display: addFavsDisplay }}
 							onPress={() => navigate('Favorites', {
 								add:          true,
 								proverbId:    id,
@@ -115,7 +133,7 @@ export default class Single extends React.Component {
 						</Icon.Button>
 						<Text style={{ height: 10 }}/>
 						<Icon.Button
-							style={{ display: favButtonsDisplay }}
+							style={{ display: viewFavsDisplay }}
 							onPress={() => navigate('Favorites')}
 							name="star"
 							backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
