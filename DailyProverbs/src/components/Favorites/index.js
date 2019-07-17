@@ -65,14 +65,35 @@ export default class FavoritesScreen extends React.Component {
 
 		if (this.state.add) {
 			return (
+				<ImageBackground style={{
+					width:  '100%',
+					height: '100%',
+					flex:   1
+				}} resizeMode='cover' source={require('./ocean-sunset.jpg')}>
 				<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-					<Text>Add {this.state.proverbTitle} To Favorites Category</Text>
-					<FlatList
+					<View style={{ padding: 22 }}>
+						<Text style={{
+							color:            Colors.white,
+							paddingTop:       10,
+							fontSize:         20,
+							fontFamily:       'Bradley Hand',
+							fontWeight:       'bold',
+							textShadowColor:  'rgba(0, 0, 0, 1)',
+							textShadowOffset: { width: -1, height: 2 },
+							textShadowRadius: 5
+						}}>Add {this.state.proverbTitle} To A Category</Text>
+					</View>
+					<FlatList style={{ width: '100%' }}
 						data={categories}
-						renderItem={({ item }) => <Button onPress={(event) => this.addToFavorites(event, item.key)}
-						                                  title={item.title} key={item.key}/>}
+						renderItem={({ item }) => (
+							<View style={{ width: '100%', marginBottom: 10, padding: 10, backgroundColor: Colors.darkGreen }}>
+								<Button onPress={(event) => this.addToFavorites(event, item.key)}
+						                                  color={Colors.white} title={item.title} key={item.key}/>
+							</View>
+						)}
 					/>
 				</View>
+				</ImageBackground>
 			)
 		}
 
@@ -82,9 +103,7 @@ export default class FavoritesScreen extends React.Component {
 					width:  '100%',
 					height: '100%',
 					flex:   1
-				}}
-				                 resizeMode='cover'
-				                 source={require('./ocean-sunset.jpg')}>
+				}} resizeMode='cover' source={require('./ocean-sunset.jpg')}>
 					<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
 						<ActivityIndicator size="large" color={Colors.white}/>
 					</View>
