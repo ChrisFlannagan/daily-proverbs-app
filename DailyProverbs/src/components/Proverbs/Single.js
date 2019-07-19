@@ -10,12 +10,14 @@ import stripTags from 'underscore.string/stripTags';
 import trim from 'underscore.string/trim';
 import unescapeHTML from 'underscore.string/unescapeHTML';
 import LinearGradient from "react-native-linear-gradient";
+import { gyroscope } from "react-native-sensors";
 
 export default class Single extends React.Component {
 
 	constructor(props) {
 		super(props);
 		const { navigation } = this.props;
+
 		this.state = {
 			proverbId:  navigation.getParam('proverbId', 0),
 			isLoading:  true,
@@ -29,6 +31,15 @@ export default class Single extends React.Component {
 
 	componentDidMount() {
 		this.prevProverb();
+
+		const subscription = gyroscope.subscribe(
+			({ x, y, z, timestamp }) => {
+				console.log({ x, y, z, timestamp });
+			},
+			(err) => {
+				console.log("no working on simulator");
+			},
+		);
 	}
 
 	async prevProverb() {
