@@ -45,6 +45,7 @@ const baseNavigationOptions = {
 export const ArchiveStack = createStackNavigator(
 	{
 		Archive: ArchiveScreen,
+		Single:    Single,
 	},
 	{
 		initialRouteName: 'Archive',
