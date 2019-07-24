@@ -50,15 +50,15 @@ export default class ArchiveScreen extends React.Component {
 
 	_keyExtractor = (item, index) => item.id;
 	_renderItem = ({item}) => (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, paddingBottom: 10, borderBottomColor: Colors.grey, borderBottomWidth: 1, marginBottom: 10 }}>
+			<Text style={{fontSize: 12, color: Colors.lightGreen}}>{item.date}</Text>
 			<Text onPress={() => this.props.navigation.navigate('Single', {
 				      proverbId: item.id,
 			      })}
 			      style={{
 				      fontSize: 18,
-				      padding:  10
 			      }}>
-				{item.title} - {item.date}
+				{item.title}
 			</Text>
 		</View>
 	);
@@ -84,10 +84,11 @@ export default class ArchiveScreen extends React.Component {
 		let postData = this.state.dataSource;
 		let itemsData = [];
 		postData.map((item) => {
+			let dateString = new Date(trim(stripTags(unescapeHTML(item.date))));
 			itemsData.push({
 				id: Number(item.id),
 				title: trim(stripTags(unescapeHTML(item.title.rendered))),
-				date: trim(stripTags(unescapeHTML(item.date)))
+				date: dateString.toDateString(),
 			})
 		});
 
@@ -114,14 +115,14 @@ export default class ArchiveScreen extends React.Component {
 				</ImageBackground>
 				<LinearGradient
 					colors={Colors.topBottomGray}
-					style={{ flex: 1, paddingLeft: 20, paddingRight: 20 }}>
-					<ScrollView style={{ flex: 1 }}>
+					style={{ flex: 1, paddingLeft: 10, paddingRight: 10 }}>
+					<ScrollView style={{ flex: 1, paddingTop: 15 }}>
 						<FlatList
 							data={itemsData}
 							keyExtractor={this._keyExtractor}
 							renderItem={this._renderItem}
 							/>
-						<View style={{ padding: 20, display: this.state.displayNextBtn }}>
+						<View style={{ padding: 10, display: this.state.displayNextBtn }}>
 							<Icon.Button
 								onPress={() => this.loadPage()} name="chevron-right"
 								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
