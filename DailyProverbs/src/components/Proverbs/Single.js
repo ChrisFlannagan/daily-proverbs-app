@@ -100,6 +100,7 @@ export default class Single extends React.Component {
 
 		let id = Number(postData.id);
 		let title = trim(stripTags(unescapeHTML(postData.title.rendered)));
+		let proverb = trim(stripTags(unescapeHTML(postData.excerpt.rendered)))
 		let content = trim(stripTags(unescapeHTML(postData.content.rendered)));
 
 		let addFavsDisplay = 'flex';
@@ -161,6 +162,12 @@ export default class Single extends React.Component {
 							paddingTop: 10,
 							fontSize:   25,
 							lineHeight: 35,
+							color:      Colors.grey
+						}}>{proverb}</Text>
+						<Text style={{
+							paddingTop: 10,
+							fontSize:   15,
+							lineHeight: 25,
 							color:      Colors.grey
 						}}>{content}</Text>
 						<View style={{ padding: 20, display: this.state.displayNextBtn }}>

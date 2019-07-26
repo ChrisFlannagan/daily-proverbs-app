@@ -18,12 +18,17 @@ export default class ArchiveScreen extends React.Component {
 		this.state = {
 			isLoading: true,
 			page:      0,
-			perPage:   20,
+			perPage:   10,
 			totalPages: 1,
 		};
 	}
 
 	componentDidMount() {
+		this.loadPage();
+	}
+
+	prevPage() {
+		this.state.page = this.state.page - 2;
 		this.loadPage();
 	}
 
@@ -33,8 +38,12 @@ export default class ArchiveScreen extends React.Component {
 		let nextPage = this.state.page + 1;
 		retrieve({ numberposts: this.state.perPage, page: nextPage }).then((data) => {
 				let displayNextBtn = 'flex';
+				let displayPrevBtn = 'flex';
 				if (nextPage === parseInt(data.totalPages)) {
 					displayNextBtn = 'none';
+				}
+				if (nextPage === 1) {
+					displayPrevBtn = 'none';
 				}
 
 				this.setState({
@@ -42,13 +51,14 @@ export default class ArchiveScreen extends React.Component {
 					dataSource:     data.text,
 					totalPages:     data.totalPages,
 					displayNextBtn: displayNextBtn,
+					displayPrevBtn: displayPrevBtn,
 					page:           nextPage,
 				});
 			},
 		);
 	}
 
-	_keyExtractor = (item, index) => item.id;
+	_keyExtractor = (item, index) => 'provb' + item.id;
 	_renderItem = ({item}) => (
 		<View style={{ flex: 1, paddingBottom: 10, borderBottomColor: Colors.grey, borderBottomWidth: 1, marginBottom: 10 }}>
 			<Text style={{fontSize: 12, color: Colors.lightGreen}}>{item.date}</Text>
@@ -122,12 +132,21 @@ export default class ArchiveScreen extends React.Component {
 							keyExtractor={this._keyExtractor}
 							renderItem={this._renderItem}
 							/>
-						<View style={{ padding: 10, display: this.state.displayNextBtn }}>
+						<View style={{ textAlign: 'right', padding: 10, display: this.state.displayNextBtn }}>
 							<Icon.Button
 								onPress={() => this.loadPage()} name="chevron-right"
 								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
 								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
 									Next Page
+								</Text>
+							</Icon.Button>
+						</View>
+						<View style={{ padding: 10, display: this.state.displayPrevBtn }}>
+							<Icon.Button
+								onPress={() => this.prevPage()} name="chevron-left"
+								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+									Prev Page
 								</Text>
 							</Icon.Button>
 						</View>
