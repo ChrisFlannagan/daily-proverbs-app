@@ -5,7 +5,7 @@ export default class SettingsScreen extends React.Component {
 	render() {
 		return (
 			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<Text>Settings Screen</Text>
+				<Text>Prayer Requests - make the input text field borderless and feel like typing on screen with other prayers</Text>
 			</View>
 		);
 	}

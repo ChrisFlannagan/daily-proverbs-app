@@ -92,7 +92,7 @@ export const Tabbed = createMaterialBottomTabNavigator({
 		screen:            SettingsScreen,
 		navigationOptions: {
 			tabBarIcon: ({ tintColor }) => (
-				<Icon name="cog" size={26} color={tintColor}/>
+				<Icon name="fire" size={26} color={tintColor}/>
 			),
 			...baseNavigationOptions,
 		},
