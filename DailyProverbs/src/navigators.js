@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View, FlatList} from 'react-native';
+import {Text} from 'react-native';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs";
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -9,7 +9,7 @@ import Icon2 from 'react-native-vector-icons/Entypo';
 import Single from 'DailyProverbs/src/components/Proverbs/Single';
 import FavoritesScreen from 'DailyProverbs/src/components/Favorites';
 import ArchiveScreen from 'DailyProverbs/src/components/Archive';
-import SettingsScreen from 'DailyProverbs/src/components/Settings';
+import PrayerRequestsScreen from 'DailyProverbs/src/components/PrayerRequests';
 
 // Constants
 import Colors from 'DailyProverbs/src/colors.js';
@@ -88,8 +88,8 @@ export const Tabbed = createMaterialBottomTabNavigator({
 			...baseNavigationOptions,
 		},
 	},
-	Favorites: {
-		screen:            SettingsScreen,
+	PrayerRequests: {
+		screen:            PrayerRequestsScreen,
 		navigationOptions: {
 			tabBarIcon: ({ tintColor }) => (
 				<Icon name="fire" size={26} color={tintColor}/>
