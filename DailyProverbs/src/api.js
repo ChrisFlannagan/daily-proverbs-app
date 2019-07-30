@@ -19,7 +19,6 @@ export function retrieve(options) {
 
 export function retrieveById(options) {
 	let buildUrl = Vars.URL + '/' + options.proverbId;
-	console.log(buildUrl);
 	return fetch(buildUrl)
 	.then((response) => {
 		return response.text().then((text) => {
@@ -33,4 +32,20 @@ export function retrieveById(options) {
 	.catch((error) => {
 		console.error(error);
 	});
+}
+
+export function sendPrayerRequest(options) {
+	let buildUrl = Vars.baseURL + '/wp-admin/admin-ajax.php';
+	let formdata = new FormData();
+	formdata.append('action', 'add_prayer_request');
+	formdata.append('prayer', options.prayer);
+	formdata.append('device_id', options.deviceId);
+	return fetch(buildUrl, {
+	method: 'POST',
+	headers: {
+		'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+		'Content-Type': 'x-www-form-urlencoded',
+	},
+	body: formdata,
+});
 }

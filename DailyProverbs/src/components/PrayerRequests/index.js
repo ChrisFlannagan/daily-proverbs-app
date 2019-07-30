@@ -2,8 +2,8 @@ import React from "react";
 import {View, Text, TextInput} from "react-native";
 import Colors from '../../colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {sendPrayerRequest} from '../../api';
 import DeviceInfo from 'react-native-device-info';
-import replaceAll from 'underscore.string/replaceAll';
 
 class PrayerInput extends React.Component {
 	render() {
@@ -22,11 +22,20 @@ export default class PrayerRequestsScreen extends React.Component {
 		super(props);
 		this.state = {
 			text: '',
+			isSending: false
 		};
 	}
 
-	sendPrayer = function () {
-
+	async sendPrayer() {
+		this.setState({isSending: true});
+		sendPrayerRequest({ prayer: this.state.text, deviceId: DeviceInfo.getDeviceId() }).then((data) => {
+				console.log(data);
+				this.setState({
+					isSending: false,
+					text:      '',
+				});
+			},
+		);
 	};
 
 	render() {
@@ -48,7 +57,7 @@ export default class PrayerRequestsScreen extends React.Component {
 				             multiline={true}
 				             numberOfLines={4}
 				             onChangeText={(text) => {
-				             	this.setState({ text: text });
+					             this.setState({ text: text });
 				             }}
 				             value={this.state.text}
 				/>
