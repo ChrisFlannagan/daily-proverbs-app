@@ -43,7 +43,7 @@ export default class Single extends React.Component {
 		this.setState({favorites: favoritesIds});
 
 		if (this.state.proverbId === 0) {
-			retrieve({ numberposts: 1, page: nextPage }).then((data) => {
+			retrieve({ numberposts: 1, page: nextPage, postType: 'daily-proverbs' }).then((data) => {
 					let displayNextBtn = 'flex';
 					if (nextPage === parseInt(data.totalPages)) {
 						displayNextBtn = 'none';
@@ -59,7 +59,7 @@ export default class Single extends React.Component {
 				},
 			);
 		} else {
-			retrieveById({ proverbId: this.state.proverbId }).then((data) => {
+			retrieveById({ proverbId: this.state.proverbId, postType: 'daily-proverbs' }).then((data) => {
 				this.setState({
 					isLoading:      false,
 					dataSource:     data.text,

@@ -1,9 +1,12 @@
 import React from "react";
-import {View, Text, TextInput} from "react-native";
+import {Animated, View, Text, TextInput} from "react-native";
 import Colors from '../../colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {sendPrayerRequest} from '../../api';
+import {retrieve, sendPrayerRequest} from '../../api';
 import DeviceInfo from 'react-native-device-info';
+import trim from 'underscore.string/trim';
+import stripTags from 'underscore.string/stripTags';
+import unescapeHTML from 'underscore.string/unescapeHTML';
 
 class PrayerInput extends React.Component {
 	render() {
@@ -21,15 +24,57 @@ export default class PrayerRequestsScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: '',
-			isSending: false
+			text:             '',
+			isSending:        false,
+			isLoading:        true,
+			dataSource:       null,
+			prayerTopFade:    new Animated.Value(0),
+			prayerTopMove:    new Animated.Value(45),
+			prayerTopOneText: '',
+			prayerBotOneText: '',
 		};
+		retrieve({ numberposts: 5, page: 1, postType: 'prayer-reqs' }).then((data) => {
+				let prayerOne = '';
+				let prayerTwo = '';
+				data.text.map((item) => {
+					if (prayerOne === '') {
+						prayerOne = trim(stripTags(unescapeHTML(item.title.rendered)));
+					} else if (prayerTwo === '') {
+						prayerTwo = trim(stripTags(unescapeHTML(item.title.rendered)));
+					}
+				});
+
+				this.setState({
+					isLoading:        false,
+					dataSource:       data.text,
+					prayerTopOneText: prayerOne,
+					prayerBotOneText: prayerTwo,
+				});
+				Animated.timing(
+					this.state.prayerTopFade,
+					{
+						toValue:  1,
+						duration: 5000,
+					}
+				).start();
+				Animated.timing(
+					this.state.prayerTopMove,
+					{
+						toValue:  150,
+						duration: 7000,
+					}
+				).start();
+			},
+		);
 	}
 
 	async sendPrayer() {
-		this.setState({isSending: true});
+		if (this.state.text === '') {
+			return;
+		}
+
+		this.setState({ isSending: true });
 		sendPrayerRequest({ prayer: this.state.text, deviceId: DeviceInfo.getDeviceId() }).then((data) => {
-				console.log(data);
 				this.setState({
 					isSending: false,
 					text:      '',
@@ -39,12 +84,21 @@ export default class PrayerRequestsScreen extends React.Component {
 	};
 
 	render() {
+		let { prayerTopFade, prayerTopMove } = this.state;
+
 		return (
 			<View style={{
 				flex:           1,
 				alignItems:     "center",
 				justifyContent: "center"
 			}}>
+				<Animated.View style={{ position: 'absolute', zIndex: 9999, top: prayerTopMove }}>
+					<Animated.Text style={{
+						color:    Colors.grey,
+						fontSize: 25,
+						opacity:  prayerTopFade
+					}}>{this.state.prayerTopOneText}</Animated.Text>
+				</Animated.View>
 				<PrayerInput style={{
 					color:             Colors.grey,
 					borderBottomWidth: 1,
@@ -69,6 +123,13 @@ export default class PrayerRequestsScreen extends React.Component {
 						send
 					</Text>
 				</Icon.Button>
+				<Animated.View style={{ position: 'absolute', zIndex: 9999, bottom: prayerTopMove }}>
+					<Animated.Text style={{
+						color:    Colors.grey,
+						fontSize: 25,
+						opacity:  prayerTopFade
+					}}>{this.state.prayerBotOneText}</Animated.Text>
+				</Animated.View>
 			</View>
 		);
 	}

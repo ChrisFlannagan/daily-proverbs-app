@@ -36,7 +36,7 @@ export default class ArchiveScreen extends React.Component {
 		this.setState({ isLoading: true });
 
 		let nextPage = this.state.page + 1;
-		retrieve({ numberposts: this.state.perPage, page: nextPage }).then((data) => {
+		retrieve({ numberposts: this.state.perPage, page: nextPage, postType: 'daily-proverbs' }).then((data) => {
 				let displayNextBtn = 'flex';
 				let displayPrevBtn = 'flex';
 				if (nextPage === parseInt(data.totalPages)) {

@@ -1,7 +1,7 @@
 import Vars from './components/Api/Vars';
 
 export function retrieve(options) {
-	let buildUrl = Vars.URL + '?page=' + options.page + '&per_page=' + options.numberposts;
+	let buildUrl = Vars.URL + options.postType + '/?page=' + options.page + '&per_page=' + options.numberposts;
 	return fetch(buildUrl)
 	.then((response) => {
 		return response.text().then((text) => {
@@ -18,7 +18,7 @@ export function retrieve(options) {
 }
 
 export function retrieveById(options) {
-	let buildUrl = Vars.URL + '/' + options.proverbId;
+	let buildUrl = Vars.URL + options.postType + '/' + options.proverbId;
 	return fetch(buildUrl)
 	.then((response) => {
 		return response.text().then((text) => {
