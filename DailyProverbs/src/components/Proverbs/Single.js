@@ -17,13 +17,13 @@ export default class Single extends React.Component {
 		super(props);
 		const { navigation } = this.props;
 		this.state = {
-			proverbId:  navigation.getParam('proverbId', 0),
-			isLoading:  true,
-			page:       (navigation.getParam('page', 1) - 1),
-			totalPages: 1,
-			favorites: [],
+			proverbId:       navigation.getParam('proverbId', 0),
+			isLoading:       true,
+			page:            (navigation.getParam('page', 1) - 1),
+			totalPages:      1,
+			favorites:       [],
 			viewFavsDisplay: 'flex',
-			addFavDisplay: 'flex',
+			addFavDisplay:   'flex',
 		};
 	}
 
@@ -31,21 +31,35 @@ export default class Single extends React.Component {
 		this.prevProverb();
 	}
 
-	async prevProverb() {
+	nextProverb() {
+		const nextPage = this.state.page - 2;
+		this.prevProverb(nextPage);
+	}
+
+	async prevProverb(goTo) {
 		this.setState({ isLoading: true });
 
 		let nextPage = this.state.page + 1;
+		if (goTo !== undefined) {
+			nextPage = goTo + 1;
+		}
+		
 		let favorites = await getFavorites();
 		let favoritesIds = [];
 		favorites.map((favorite) => {
 			favoritesIds.push(favorite.id);
 		});
-		this.setState({favorites: favoritesIds});
+		this.setState({ favorites: favoritesIds });
 
 		if (this.state.proverbId === 0) {
 			retrieve({ numberposts: 1, page: nextPage, postType: 'daily-proverbs' }).then((data) => {
+					let displayPrevBtn = 'flex';
 					let displayNextBtn = 'flex';
 					if (nextPage === parseInt(data.totalPages)) {
+						displayPrevBtn = 'none';
+					}
+
+					if (nextPage === 1) {
 						displayNextBtn = 'none';
 					}
 
@@ -53,6 +67,7 @@ export default class Single extends React.Component {
 						isLoading:      false,
 						dataSource:     data.text,
 						totalPages:     data.totalPages,
+						displayPrevBtn: displayPrevBtn,
 						displayNextBtn: displayNextBtn,
 						page:           nextPage,
 					});
@@ -64,7 +79,7 @@ export default class Single extends React.Component {
 					isLoading:      false,
 					dataSource:     data.text,
 					totalPages:     data.totalPages,
-					displayNextBtn: 'none',
+					displayPrevBtn: 'none',
 				});
 			});
 		}
@@ -172,7 +187,16 @@ export default class Single extends React.Component {
 						}}>{content}</Text>
 						<View style={{ padding: 20, display: this.state.displayNextBtn }}>
 							<Icon.Button
-								onPress={() => this.prevProverb()} name="chevron-right"
+								onPress={() => this.nextProverb()} name="chevron-right"
+								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+									Next Proverb
+								</Text>
+							</Icon.Button>
+						</View>
+						<View style={{ padding: 20, display: this.state.displayPrevBtn }}>
+							<Icon.Button
+								onPress={() => this.prevProverb()} name="chevron-left"
 								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
 								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
 									Previous Proverb
