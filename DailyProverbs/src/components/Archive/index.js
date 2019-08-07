@@ -83,7 +83,7 @@ export default class ArchiveScreen extends React.Component {
 					flex:   1
 				}}
 				                 resizeMode='cover'
-				                 source={require('./mountains.jpg')}>
+				                 source={require('./compass.jpg')}>
 					<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
 						<ActivityIndicator size="large" color={Colors.white}/>
 					</View>
@@ -109,7 +109,7 @@ export default class ArchiveScreen extends React.Component {
 					height: 'auto',
 				}}
 				                 resizeMode='cover'
-				                 source={require('./mountains.jpg')}>
+				                 source={require('./compass.jpg')}>
 					<View style={{ padding: 20 }}>
 						<Text style={{
 							color:            Colors.white,

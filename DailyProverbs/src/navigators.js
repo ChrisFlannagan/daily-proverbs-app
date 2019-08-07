@@ -26,8 +26,9 @@ class IconTitle extends React.Component {
 				textAlign: 'center',
 				justifyContent: 'flex-start'
 			}}>
-				<Icon2 name="feather" size={26} style={{ color: Colors.white }}/>
-				<Text style={{ color: Colors.white, fontSize: 18 }}>Daily Proverbs</Text>
+				<Icon2 name="compass" size={20} style={{ color: Colors.white }}/>
+				<Text style={{ fontSize: 18 }}> </Text>
+				<Text style={{ color: Colors.white, fontSize: 18 }}>Seeker's Edge</Text>
 			</Text>
 		);
 	}

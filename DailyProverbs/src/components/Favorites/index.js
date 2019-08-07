@@ -69,7 +69,7 @@ export default class FavoritesScreen extends React.Component {
 					width:  '100%',
 					height: '100%',
 					flex:   1
-				}} resizeMode='cover' source={require('./ocean-sunset.jpg')}>
+				}} resizeMode='cover' source={require('./compass.jpg')}>
 				<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
 					<View style={{ padding: 22 }}>
 						<Text style={{
@@ -103,7 +103,7 @@ export default class FavoritesScreen extends React.Component {
 					width:  '100%',
 					height: '100%',
 					flex:   1
-				}} resizeMode='cover' source={require('./ocean-sunset.jpg')}>
+				}} resizeMode='cover' source={require('./compass.jpg')}>
 					<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
 						<ActivityIndicator size="large" color={Colors.white}/>
 					</View>
@@ -142,7 +142,7 @@ export default class FavoritesScreen extends React.Component {
 					height: 'auto',
 				}}
 				                 resizeMode='cover'
-				                 source={require('./ocean-sunset.jpg')}>
+				                 source={require('./compass.jpg')}>
 					<View style={{ padding: 20 }}>
 						<Text style={{
 							color:            Colors.white,

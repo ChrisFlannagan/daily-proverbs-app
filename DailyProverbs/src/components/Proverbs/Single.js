@@ -81,7 +81,7 @@ export default class Single extends React.Component {
 					flex:   1
 				}}
 				                 resizeMode='cover'
-				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
+				                 source={require('./compass.jpg')}>
 					<View style={{ flex: 1, padding: 20, justifyContent: "center" }}>
 						<ActivityIndicator size="large" color={Colors.white}/>
 					</View>
@@ -117,7 +117,7 @@ export default class Single extends React.Component {
 					height: 'auto',
 				}}
 				                 resizeMode='cover'
-				                 source={require('./dusk-color-sky-with-grassy-field.jpg')}>
+				                 source={require('./compass.jpg')}>
 					<View style={{ padding: 20 }}>
 						<Icon.Button
 							style={{ display: addFavsDisplay }}
