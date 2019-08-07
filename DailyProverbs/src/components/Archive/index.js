@@ -132,23 +132,25 @@ export default class ArchiveScreen extends React.Component {
 							keyExtractor={this._keyExtractor}
 							renderItem={this._renderItem}
 							/>
-						<View style={{ textAlign: 'right', padding: 10, display: this.state.displayNextBtn }}>
-							<Icon.Button
-								onPress={() => this.loadPage()} name="chevron-right"
-								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
-								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
-									Next Page
-								</Text>
-							</Icon.Button>
-						</View>
-						<View style={{ padding: 10, display: this.state.displayPrevBtn }}>
-							<Icon.Button
-								onPress={() => this.prevPage()} name="chevron-left"
-								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
-								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
-									Prev Page
-								</Text>
-							</Icon.Button>
+						<View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', paddingTop: 20 }}>
+							<View style={{ display: this.state.displayPrevBtn, width: '50%', paddingRight: 5 }}>
+								<Icon.Button
+									onPress={() => this.prevPage()} name="chevron-left"
+									backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+									<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+										Prev Page
+									</Text>
+								</Icon.Button>
+							</View>
+							<View style={{ display: this.state.displayNextBtn, width: '50%', paddingLeft: 5 }}>
+								<Icon.Button
+									onPress={() => this.loadPage()} name="chevron-right"
+									backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+									<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+										Next Page
+									</Text>
+								</Icon.Button>
+							</View>
 						</View>
 					</ScrollView>
 				</LinearGradient>

@@ -43,7 +43,7 @@ export default class Single extends React.Component {
 		if (goTo !== undefined) {
 			nextPage = goTo + 1;
 		}
-		
+
 		let favorites = await getFavorites();
 		let favoritesIds = [];
 		favorites.map((favorite) => {
@@ -115,8 +115,9 @@ export default class Single extends React.Component {
 
 		let id = Number(postData.id);
 		let title = trim(stripTags(unescapeHTML(postData.title.rendered)));
-		let proverb = trim(stripTags(unescapeHTML(postData.excerpt.rendered)))
+		let proverb = trim(stripTags(unescapeHTML(postData.excerpt.rendered)));
 		let content = trim(stripTags(unescapeHTML(postData.content.rendered)));
+		let dateString = new Date(trim(stripTags(unescapeHTML(postData.date)))).toDateString();
 
 		let addFavsDisplay = 'flex';
 		this.state.favorites.map((favorite) => {
@@ -179,29 +180,32 @@ export default class Single extends React.Component {
 							lineHeight: 35,
 							color:      Colors.grey
 						}}>{proverb}</Text>
+						<Text style={{paddingTop: 10, fontSize: 15, color: Colors.grey }}>{dateString}</Text>
 						<Text style={{
 							paddingTop: 10,
 							fontSize:   15,
 							lineHeight: 25,
 							color:      Colors.grey
 						}}>{content}</Text>
-						<View style={{ padding: 20, display: this.state.displayNextBtn }}>
-							<Icon.Button
-								onPress={() => this.nextProverb()} name="chevron-right"
-								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
-								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
-									Next Proverb
-								</Text>
-							</Icon.Button>
-						</View>
-						<View style={{ padding: 20, display: this.state.displayPrevBtn }}>
-							<Icon.Button
-								onPress={() => this.prevProverb()} name="chevron-left"
-								backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
-								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
-									Previous Proverb
-								</Text>
-							</Icon.Button>
+						<View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', paddingTop: 20 }}>
+							<View style={{ display: this.state.displayPrevBtn, width: '50%', paddingRight: 5 }}>
+								<Icon.Button
+									onPress={() => this.prevProverb()} name="chevron-left"
+									backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+									<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+										Previous Proverb
+									</Text>
+								</Icon.Button>
+							</View>
+							<View style={{ display: this.state.displayNextBtn, width: '50%', paddingLeft: 5 }}>
+								<Icon.Button
+									onPress={() => this.nextProverb()} name="chevron-right"
+									backgroundColor={Colors.favDarkGold} color={Colors.favGold}>
+									<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+										Next Proverb
+									</Text>
+								</Icon.Button>
+							</View>
 						</View>
 					</ScrollView>
 				</LinearGradient>
