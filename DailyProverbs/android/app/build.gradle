@@ -102,7 +102,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.dailyproverbs"
+        applicationId "com.theedge.daily"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
