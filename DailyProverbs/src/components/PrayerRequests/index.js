@@ -1,5 +1,5 @@
 import React from "react";
-import {Animated, View, Text, TextInput} from "react-native";
+import {Animated, View, Text, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from "react-native";
 import Colors from '../../colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {retrieve, sendPrayerRequest} from '../../api';
@@ -87,50 +87,51 @@ export default class PrayerRequestsScreen extends React.Component {
 		let { prayerTopFade, prayerTopMove } = this.state;
 
 		return (
-			<View style={{
-				flex:           1,
-				alignItems:     "center",
-				justifyContent: "center"
-			}}>
-				<Animated.View style={{ position: 'absolute', zIndex: 9999, top: prayerTopMove }}>
-					<Animated.Text style={{
-						color:    Colors.grey,
-						fontSize: 25,
-						opacity:  prayerTopFade
-					}}>{this.state.prayerTopOneText}</Animated.Text>
-				</Animated.View>
-				<PrayerInput style={{
-					color:             Colors.grey,
-					borderBottomWidth: 1,
-					borderBottomColor: Colors.grey,
-					paddingBottom:     10,
-					fontSize:          20
-				}}
-				             autoFocus={true}
-				             placeholder="New Request ..."
-				             multiline={true}
-				             numberOfLines={4}
-				             onChangeText={(text) => {
-					             this.setState({ text: text });
-				             }}
-				             value={this.state.text}
-				/>
-				<Text style={{ fontSize: 12 }}> </Text>
-				<Icon.Button name="send" backgroundColor='transparent' color={Colors.grey} onPress={(event) => {
-					this.sendPrayer();
-				}}>
-					<Text style={{ fontFamily: 'Arial', fontSize: 12, color: Colors.grey }}>
-						send
-					</Text>
-				</Icon.Button>
-				<Animated.View style={{ position: 'absolute', zIndex: 9999, bottom: prayerTopMove }}>
-					<Animated.Text style={{
-						color:    Colors.grey,
-						fontSize: 25,
-						opacity:  prayerTopFade
-					}}>{this.state.prayerBotOneText}</Animated.Text>
-				</Animated.View>
-			</View>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+				<KeyboardAvoidingView behavior="padding" style={{
+					flex:           1,
+					alignItems:     "center",
+					justifyContent: "center"
+				}} enabled>
+					<Animated.View style={{ position: 'absolute', zIndex: 9999, top: prayerTopMove }}>
+						<Animated.Text style={{
+							color:    Colors.grey,
+							fontSize: 25,
+							opacity:  prayerTopFade
+						}}>{this.state.prayerTopOneText}</Animated.Text>
+					</Animated.View>
+					<PrayerInput style={{
+						color:             Colors.grey,
+						borderBottomWidth: 1,
+						borderBottomColor: Colors.grey,
+						paddingBottom:     10,
+						fontSize:          20
+					}}
+					             placeholder="New Request ..."
+					             multiline={true}
+					             numberOfLines={4}
+					             onChangeText={(text) => {
+						             this.setState({ text: text });
+					             }}
+					             value={this.state.text}
+					/>
+					<Text style={{ fontSize: 12 }}> </Text>
+					<Icon.Button name="send" backgroundColor='transparent' color={Colors.grey} onPress={(event) => {
+						this.sendPrayer();
+					}}>
+						<Text style={{ fontFamily: 'Arial', fontSize: 12, color: Colors.grey }}>
+							send
+						</Text>
+					</Icon.Button>
+					<Animated.View style={{ position: 'absolute', zIndex: 9999, bottom: prayerTopMove }}>
+						<Animated.Text style={{
+							color:    Colors.grey,
+							fontSize: 25,
+							opacity:  prayerTopFade
+						}}>{this.state.prayerBotOneText}</Animated.Text>
+					</Animated.View>
+				</KeyboardAvoidingView>
+			</TouchableWithoutFeedback>
 		);
 	}
 }
