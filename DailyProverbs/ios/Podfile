@@ -8,6 +8,7 @@ target 'The Edge Daily' do
   pod 'Firebase/Core', '~> 6.3.0'
   pod 'Firebase/Messaging'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
 
   target 'The Edge DailyTests' do
     inherit! :search_paths

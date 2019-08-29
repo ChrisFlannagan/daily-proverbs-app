@@ -1,33 +1,17 @@
-import PushNotification from 'react-native-push-notification';
-import { PushNotificationIOS } from 'react-native';
+import firebase from 'react-native-firebase';
 
-const configure = () => {
-	PushNotification.configure({
-
-		onRegister: function(token) {
-			//process token
-		},
-
-		onNotification: function(notification) {
-			// process the notification
-			// required on iOS only
-			notification.finish(PushNotificationIOS.FetchResult.NoData);
-		},
-
-		permissions: {
-			alert: true,
-			badge: true,
-			sound: true
-		},
-
-		popInitialNotification: true,
-		requestPermissions: true,
-
+const permissionCheck = async () => {
+	firebase.messaging().requestPermission()
+	.then(() => {
+		// User has authorised
+	})
+	.catch(error => {
+		console.log(error);
 	});
 };
 
 
 
 export {
-	configure,
+	permissionCheck,
 };
