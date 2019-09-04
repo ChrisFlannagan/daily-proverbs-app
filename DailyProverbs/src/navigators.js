@@ -30,7 +30,7 @@ class IconTitle extends React.Component {
 			}}>
 				<Icon2 name="compass" size={20} style={{ color: Colors.white }}/>
 				<Text style={{ fontSize: 18 }}> </Text>
-				<Text style={{ color: Colors.white, fontSize: 18 }}>Seeker's Edge</Text>
+				<Text style={{ color: Colors.white, fontSize: 18 }}>The Daily Edge</Text>
 			</Text>
 		);
 	}
