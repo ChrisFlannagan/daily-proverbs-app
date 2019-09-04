@@ -69,6 +69,7 @@
 		83C3CD3422C452B60092B042 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83C3CD2522C452B60092B042 /* MaterialIcons.ttf */; };
 		8B4C57390CEF4E9BB97F6EDA /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7385D8EC8449FE869069A2 /* libBVLinearGradient.a */; };
 		92ADE349BD13469F9AF6890D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A8A084E989C495693FB128D /* FontAwesome.ttf */; };
+		95644BA2B2C744D18021B42E /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D57BF56049343F6B5FC4734 /* Fontisto.ttf */; };
 		96379AAA23A4458A96C202F5 /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A40C7D01B674BA19567F24F /* libRNVectorIcons-tvOS.a */; };
 		9681DCF0EDDF4741B74A84C0 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C57A9927B2C4103B1FC09DA /* Octicons.ttf */; };
 		9CE2C8ECFD754847BEE899B6 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7CE99747698409DB1B5A1D9 /* Feather.ttf */; };
@@ -490,6 +491,7 @@
 		69CB8AEFE9864BAD81E7B28B /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		6A40C7D01B674BA19567F24F /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
 		6C57A9927B2C4103B1FC09DA /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		6D57BF56049343F6B5FC4734 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		700F17A766584F1A8E65E657 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		71C64779C2710DDC878E01EB /* Pods-The Edge Daily-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The Edge Daily-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-The Edge Daily-tvOSTests/Pods-The Edge Daily-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		72E9D55D4F0F0FBA7437E01F /* libPods-The Edge Daily-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-The Edge Daily-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -950,6 +952,7 @@
 				6C57A9927B2C4103B1FC09DA /* Octicons.ttf */,
 				55C32FF0557343D8B116126A /* SimpleLineIcons.ttf */,
 				5A83D4E3A3EB49ECAB07601B /* Zocial.ttf */,
+				6D57BF56049343F6B5FC4734 /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1574,6 +1577,7 @@
 				9681DCF0EDDF4741B74A84C0 /* Octicons.ttf in Resources */,
 				C3B7970266204C57BE7305B2 /* SimpleLineIcons.ttf in Resources */,
 				6D8A437C56204F7F9320E67F /* Zocial.ttf in Resources */,
+				95644BA2B2C744D18021B42E /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
