@@ -5,7 +5,6 @@ import Colors from '../../colors';
 import {getFavorites} from '../../storage';
 
 // functions & libraries
-import Vars from '../Api/Vars';
 import {retrieve, retrieveById} from '../../api';
 import stripTags from 'underscore.string/stripTags';
 import trim from 'underscore.string/trim';
