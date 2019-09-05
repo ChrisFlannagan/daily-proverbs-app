@@ -5,11 +5,23 @@ import Colors from '../../colors';
 import {getFavorites} from '../../storage';
 
 // functions & libraries
+import Vars from '../Api/Vars';
 import {retrieve, retrieveById} from '../../api';
 import stripTags from 'underscore.string/stripTags';
 import trim from 'underscore.string/trim';
 import unescapeHTML from 'underscore.string/unescapeHTML';
 import LinearGradient from "react-native-linear-gradient";
+import Share from 'react-native-share';
+
+const shareModal = async (shareOptions) => {
+	try {
+		const ShareResponse = await Share.open(shareOptions);
+		console.log(JSON.stringify(ShareResponse, null, 2));
+	} catch (error) {
+		console.log('Error =>', error);
+		setResult('error: '.concat(getErrorString(error)));
+	}
+};
 
 export default class Single extends React.Component {
 
@@ -117,6 +129,7 @@ export default class Single extends React.Component {
 		let title = trim(stripTags(unescapeHTML(postData.title.rendered)));
 		let proverb = trim(stripTags(unescapeHTML(postData.excerpt.rendered)));
 		let content = trim(stripTags(unescapeHTML(postData.content.rendered)));
+		let link = trim(stripTags(unescapeHTML(postData.link)));
 		let dateString = new Date(trim(stripTags(unescapeHTML(postData.date)))).toDateString();
 
 		let addFavsDisplay = 'flex';
@@ -125,6 +138,12 @@ export default class Single extends React.Component {
 				addFavsDisplay = 'none';
 			}
 		});
+
+		let shareOptions = {
+			title:   'Share via',
+			message: `The Edge Daily: ${title}`,
+			url:     link,
+		};
 
 		return (
 			<View style={{ flex: 1 }}>
@@ -161,12 +180,12 @@ export default class Single extends React.Component {
 						<Text style={{
 							color:            Colors.white,
 							paddingTop:       10,
-							fontSize:         50,
+							fontSize:         35,
 							fontFamily:       'Bradley Hand',
 							fontWeight:       'bold',
 							textShadowColor:  'rgba(0, 0, 0, 1)',
-							textShadowOffset: { width: -1, height: 2 },
-							textShadowRadius: 5
+							textShadowOffset: { width: -1, height: 1 },
+							textShadowRadius: 4
 						}}>{title}</Text>
 					</View>
 				</ImageBackground>
@@ -174,20 +193,38 @@ export default class Single extends React.Component {
 					colors={Colors.topBottomGray}
 					style={{ flex: 1, paddingLeft: 20, paddingRight: 20 }}>
 					<ScrollView style={{ flex: 1 }}>
+						<View style={{ paddingTop: 10 }}>
+							<Icon.Button
+								onPress={() => shareModal(shareOptions)}
+								name="share-square-o"
+								style={{ borderRadius: 0 }}
+								backgroundColor={Colors.grey} color={Colors.white}>
+								<Text style={{ fontFamily: 'Arial', fontSize: 15, color: Colors.white }}>
+									Share or Copy
+								</Text>
+							</Icon.Button>
+						</View>
 						<Text style={{
 							paddingTop: 10,
 							fontSize:   25,
 							lineHeight: 35,
 							color:      Colors.grey
 						}}>{proverb}</Text>
-						<Text style={{paddingTop: 10, fontSize: 15, color: Colors.grey }}>{dateString}</Text>
+						<Text style={{ paddingTop: 10, fontSize: 15, color: Colors.grey }}>{dateString}</Text>
 						<Text style={{
 							paddingTop: 10,
 							fontSize:   15,
 							lineHeight: 25,
 							color:      Colors.grey
 						}}>{content}</Text>
-						<View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'flex-start', paddingTop: 20 }}>
+						<View style={{
+							flex:          1,
+							flexDirection: 'row',
+							flexWrap:      'wrap',
+							alignItems:    'flex-start',
+							paddingTop:    20,
+							paddingBottom: 20,
+						}}>
 							<View style={{ display: this.state.displayPrevBtn, width: '50%', paddingRight: 5 }}>
 								<Icon.Button
 									onPress={() => this.prevProverb()} name="chevron-left"
