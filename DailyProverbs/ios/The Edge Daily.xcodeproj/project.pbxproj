@@ -49,8 +49,8 @@
 		6D8A437C56204F7F9320E67F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A83D4E3A3EB49ECAB07601B /* Zocial.ttf */; };
 		7310429EC57A49719222FDF7 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 823C58206C8547CEB949749D /* libRNCWebView.a */; };
 		7EF6D7E7A75445748B4551F5 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29EFB677460E40048B3DB192 /* Foundation.ttf */; };
+		831471B723215F6F004804FB /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		8326407023207EE000441042 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8326406F23207E8200441042 /* libRNShare.a */; };
 		8326407223207F0700441042 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8326407123207F0700441042 /* Social.framework */; };
 		8326407423207F1000441042 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8326407323207F1000441042 /* MessageUI.framework */; };
 		837BF97F23161CBD00FFAB22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 837BF95123161CBD00FFAB22 /* GoogleService-Info.plist */; };
@@ -560,7 +560,6 @@
 			files = (
 				8326407423207F1000441042 /* MessageUI.framework in Frameworks */,
 				8326407223207F0700441042 /* Social.framework in Frameworks */,
-				8326407023207EE000441042 /* libRNShare.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
@@ -1575,6 +1574,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				831471B723215F6F004804FB /* main.jsbundle in Resources */,
 				83C3CD2D22C452B60092B042 /* Ionicons.ttf in Resources */,
 				83C3CD3022C452B60092B042 /* FontAwesome.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

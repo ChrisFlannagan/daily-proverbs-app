@@ -1,12 +1,13 @@
 {
-  "name": "the-daily-edge",
-  "version": "1.2",
+  "name": "DailyProverbs",
+  "version": "0.0.1",
   "private": true,
   "license": "UNLICENCED",
   "engines": {
     "node": ">=10.0.0"
   },
   "scripts": {
+    "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
