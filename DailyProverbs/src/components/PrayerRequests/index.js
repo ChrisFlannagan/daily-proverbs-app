@@ -9,9 +9,12 @@ import {
 	Platform,
 	TouchableWithoutFeedback,
 	TouchableOpacity,
-	Keyboard, ImageBackground, FlatList, Button
+	Keyboard,
+	Button
 } from "react-native";
+
 import Colors from '../../colors';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {retrieve, sendPrayerRequest} from '../../api';
 import DeviceInfo from 'react-native-device-info';
@@ -19,6 +22,8 @@ import trim from 'underscore.string/trim';
 import stripTags from 'underscore.string/stripTags';
 import unescapeHTML from 'underscore.string/unescapeHTML';
 import firebase from 'react-native-firebase';
+
+const STORAGE_KEY = '@PrayerRequestsToolTip:key';
 
 class PrayerInput extends React.Component {
 	render() {
@@ -48,8 +53,35 @@ export default class PrayerRequestsScreen extends React.Component {
 			prayerBotOneText: '',
 			addReminderView:  false,
 			reminderText:     '',
+			showToolTip:      false,
 		};
 
+		this.showToolTip()
+		.then(() =>
+			this.retrievePrayers()
+			.then(() => {
+				console.log("loaded");
+			})
+		);
+	}
+
+	showToolTip = async () => {
+		try {
+			let seen = await AsyncStorage.getItem(STORAGE_KEY);
+			if (seen === null) {
+				this.setState({ showToolTip: true });
+				try {
+					await AsyncStorage.setItem(STORAGE_KEY, 'seen');
+				} catch (error) {
+					console.error(error.message);
+				}
+			}
+		} catch (error) {
+			console.error(error.message);
+		}
+	};
+
+	retrievePrayers = async () => {
 		retrieve({ numberposts: 5, page: 1, postType: 'prayer-reqs' }).then((data) => {
 				let prayerOne = '';
 				let prayerTwo = '';
@@ -83,7 +115,7 @@ export default class PrayerRequestsScreen extends React.Component {
 				).start();
 			},
 		);
-	}
+	};
 
 	async sendPrayer() {
 		if (this.state.text === '') {
@@ -108,9 +140,10 @@ export default class PrayerRequestsScreen extends React.Component {
 	addReminder = async (time) => {
 		const enabled = await firebase.messaging().hasPermission();
 		if (enabled) {
-			time = 24 * 60 * 60 * time;
-			time += Date.now();
-			const title = Platform.OS === "android" ? "The Edge Prayer Reminder" : "";
+			time = 24 * 60 * 60 * 1000 * time;
+			let now = Date.now();
+			time += now;
+			const title = Platform.OS === "android"?"The Edge Prayer Reminder":"";
 			const notification = new firebase.notifications.Notification()
 			.setNotificationId("777") // Any random ID
 			.setTitle(title) // Title of the notification
@@ -122,11 +155,15 @@ export default class PrayerRequestsScreen extends React.Component {
 			// schedule notification
 			firebase.notifications().scheduleNotification(notification, {
 				fireDate: time,
-				exact: false,
+				exact:    false,
 			});
 		}
 
-		this.setState({addReminderView: false});
+		this.setState({ addReminderView: false });
+		this.retrievePrayers()
+		.then(() => {
+			console.log("loaded");
+		});
 	};
 
 	render() {
@@ -153,64 +190,110 @@ export default class PrayerRequestsScreen extends React.Component {
 						        color={Colors.white} title="7 Days"/>
 					</View>
 					<View style={{ width: '100%', marginTop: 10, padding: 10, backgroundColor: Colors.white }}>
-						<Button onPress={() => {this.setState({addReminderView: false})}}
+						<Button onPress={() => {
+							this.setState({ addReminderView: false })
+						}}
 						        color={Colors.darkGreen} title="Close"/>
 					</View>
 				</View>
 			);
-		} else {
-			let { prayerTopFade, prayerTopMove } = this.state;
+		}
 
+		if (this.state.showToolTip) {
 			return (
-				<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-					<KeyboardAvoidingView behavior="padding" style={{
-						flex:           1,
-						alignItems:     "center",
-						justifyContent: "center"
-					}} enabled>
-						<AnimatedTouchable
-							style={{ padding: 20, position: 'absolute', zIndex: 9999, top: prayerTopMove }}
-							onLongPress={() => this.addReminderModal(this.state.prayerTopOneText)}>
-							<Animated.Text style={{
-								color:    Colors.grey,
-								fontSize: 25,
-								opacity:  prayerTopFade
-							}}>{this.state.prayerTopOneText}</Animated.Text>
-						</AnimatedTouchable>
-						<PrayerInput style={{
-							color:             Colors.grey,
-							borderBottomWidth: 1,
-							borderBottomColor: Colors.grey,
-							paddingBottom:     10,
-							fontSize:          20
+				<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+					<View style={{ padding: 22 }}>
+						<Text style={{
+							color:            Colors.darkGreen,
+							paddingTop:       10,
+							fontSize:         30,
+							fontFamily:       'Bradley Hand',
+							fontWeight:       'bold',
+							textShadowColor:  'rgba(0, 0, 0, 1)',
+							textShadowOffset: { width: -1, height: 2 },
+							textShadowRadius: 5
+						}}>Prayer Requests</Text>
+						<Text style={{
+							color:            Colors.darkGreen,
+							fontSize:         30,
+							fontFamily:       'Bradley Hand',
+							fontWeight:       'bold',
+							textShadowColor:  'rgba(0, 0, 0, 1)',
+							textShadowOffset: { width: -1, height: 2 },
+							textShadowRadius: 5
+						}}>@The Daily Edge.</Text>
+							<Text style={{
+							color:            Colors.darkGreen,
+							paddingTop:       20,
+							fontSize:         15,
+						}}>When new requests roll into the screen you can hold your finger down on them to set a prayer reminder notification for a day or a week from that moment.</Text>
+						<Text style={{
+							color:            Colors.darkGreen,
+							paddingTop:       10,
+							fontSize:         15,
+						}}>You can also use the New Request field to submit your own prayer requests.  Once approved by an admin (to avoid hateful messages showing up) it will randomly roll onto other users' Prayer Requests screen but show no personal information unless you add it yourself.</Text>
+					</View>
+					<View style={{ width: '100%', marginTop: 10, padding: 10, backgroundColor: Colors.white }}>
+						<Button onPress={() => {
+							this.setState({ showToolTip: false })
 						}}
-						             placeholder="New Request ..."
-						             multiline={true}
-						             numberOfLines={4}
-						             onChangeText={(text) => {
-							             this.setState({ text: text });
-						             }}
-						             value={this.state.text}
-						/>
-						<Text style={{ fontSize: 12 }}> </Text>
-						<Icon.Button name="send" backgroundColor='transparent' color={Colors.grey} onPress={(event) => {
-							this.sendPrayer();
-						}}>
-							<Text style={{ fontFamily: 'Arial', fontSize: 12, color: Colors.grey }}>
-								send
-							</Text>
-						</Icon.Button>
-						<Animated.View
-							style={{ padding: 20, position: 'absolute', zIndex: 9999, bottom: prayerTopMove }}>
-							<Animated.Text style={{
-								color:    Colors.grey,
-								fontSize: 25,
-								opacity:  prayerTopFade
-							}}>{this.state.prayerBotOneText}</Animated.Text>
-						</Animated.View>
-					</KeyboardAvoidingView>
-				</TouchableWithoutFeedback>
+						        color={Colors.darkGreen} title="Go To Prayer Requests"/>
+					</View>
+				</View>
 			);
 		}
+
+		let { prayerTopFade, prayerTopMove } = this.state;
+		return (
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+				<KeyboardAvoidingView behavior="padding" style={{
+					flex:           1,
+					alignItems:     "center",
+					justifyContent: "center"
+				}} enabled>
+					<AnimatedTouchable
+						style={{ padding: 20, position: 'absolute', zIndex: 9999, top: prayerTopMove }}
+						onLongPress={() => this.addReminderModal(this.state.prayerTopOneText)}>
+						<Animated.Text style={{
+							color:    Colors.grey,
+							fontSize: 25,
+							opacity:  prayerTopFade
+						}}>{this.state.prayerTopOneText}</Animated.Text>
+					</AnimatedTouchable>
+					<PrayerInput style={{
+						color:             Colors.grey,
+						borderBottomWidth: 1,
+						borderBottomColor: Colors.grey,
+						paddingBottom:     10,
+						fontSize:          20
+					}}
+					             placeholder="New Request ..."
+					             multiline={true}
+					             numberOfLines={4}
+					             onChangeText={(text) => {
+						             this.setState({ text: text });
+					             }}
+					             value={this.state.text}
+					/>
+					<Text style={{ fontSize: 12 }}> </Text>
+					<Icon.Button name="send" backgroundColor='transparent' color={Colors.grey} onPress={(event) => {
+						this.sendPrayer();
+					}}>
+						<Text style={{ fontFamily: 'Arial', fontSize: 12, color: Colors.grey }}>
+							send
+						</Text>
+					</Icon.Button>
+					<AnimatedTouchable
+						style={{ padding: 20, position: 'absolute', zIndex: 9999, bottom: prayerTopMove }}
+						onLongPress={() => this.addReminderModal(this.state.prayerBotOneText)}>
+						<Animated.Text style={{
+							color:    Colors.grey,
+							fontSize: 25,
+							opacity:  prayerTopFade
+						}}>{this.state.prayerBotOneText}</Animated.Text>
+					</AnimatedTouchable>
+				</KeyboardAvoidingView>
+			</TouchableWithoutFeedback>
+		);
 	}
 }
