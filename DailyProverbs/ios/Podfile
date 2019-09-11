@@ -43,8 +43,10 @@ target 'The Edge Daily' do
 						config.build_settings['GCC_WARN_64_TO_32_BIT_CONVERSION'] = 'NO'
 				end
 			end
+			if file.path.match(/^RCTWebView/)
+				file.remove_from_project
+			end
     end
-
   end
 
 end

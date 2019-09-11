@@ -47,7 +47,6 @@
 		62E1198EE9EA430D87D81807 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6794A8EC295D497B84D3C5FB /* libRNDeviceInfo-tvOS.a */; };
 		665496701E904F6880ED85CF /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD81B12CA142E78A584818 /* Entypo.ttf */; };
 		6D8A437C56204F7F9320E67F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A83D4E3A3EB49ECAB07601B /* Zocial.ttf */; };
-		7310429EC57A49719222FDF7 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 823C58206C8547CEB949749D /* libRNCWebView.a */; };
 		7EF6D7E7A75445748B4551F5 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29EFB677460E40048B3DB192 /* Foundation.ttf */; };
 		831471B723215F6F004804FB /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -400,13 +399,6 @@
 			remoteGlobalIDString = A39873CE1EA65EE60051E01A;
 			remoteInfo = "RNVectorIcons-tvOS";
 		};
-		83B0528922CD7C8200A710EF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0DC7365867674DA9826A866C /* RNCWebView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNCWebView;
-		};
 		83C3CD0E22C452280092B042 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -462,7 +454,6 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* DailyProverbsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DailyProverbsTests.m; sourceTree = "<group>"; };
 		00FEABD7DC8E474495C542DC /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
-		0DC7365867674DA9826A866C /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCWebView.xcodeproj; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; };
 		136E9D4A6BA06535CD675604 /* libPods-The Edge Daily-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-The Edge Daily-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -575,7 +566,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				49068A611D1F4A3EAA365EC5 /* libRNGestureHandler.a in Frameworks */,
 				C0EAC00A6E844442AA886B3F /* libRNVectorIcons.a in Frameworks */,
-				7310429EC57A49719222FDF7 /* libRNCWebView.a in Frameworks */,
 				8B4C57390CEF4E9BB97F6EDA /* libBVLinearGradient.a in Frameworks */,
 				AA7A11C6507747FA8A68C7C1 /* libRNCAsyncStorage.a in Frameworks */,
 				A6564725BD6F4FBCB1FA040F /* libRNDeviceInfo.a in Frameworks */,
@@ -799,7 +789,6 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				700F17A766584F1A8E65E657 /* RNGestureHandler.xcodeproj */,
 				661D3CAC0DF44230BDECDD8B /* RNVectorIcons.xcodeproj */,
-				0DC7365867674DA9826A866C /* RNCWebView.xcodeproj */,
 				50D508E0175C411FBBFA4705 /* BVLinearGradient.xcodeproj */,
 				69CB8AEFE9864BAD81E7B28B /* RNCAsyncStorage.xcodeproj */,
 				CBAA5B095E3B4A5A9CC5DA57 /* RNDeviceInfo.xcodeproj */,
@@ -865,14 +854,6 @@
 			children = (
 				83B0527722CD3DF300A710EF /* libBVLinearGradient.a */,
 				83B0527922CD3DF300A710EF /* libBVLinearGradient.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		83B0528622CD7C8100A710EF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				83B0528A22CD7C8200A710EF /* libRNCWebView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1179,10 +1160,6 @@
 				{
 					ProductGroup = 83C6344B22D6C73200FB5E2A /* Products */;
 					ProjectRef = 69CB8AEFE9864BAD81E7B28B /* RNCAsyncStorage.xcodeproj */;
-				},
-				{
-					ProductGroup = 83B0528622CD7C8100A710EF /* Products */;
-					ProjectRef = 0DC7365867674DA9826A866C /* RNCWebView.xcodeproj */;
 				},
 				{
 					ProductGroup = 83AE5D4723038CC30029F0F5 /* Products */;
@@ -1510,13 +1487,6 @@
 			remoteRef = 83B0528422CD3DF300A710EF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		83B0528A22CD7C8200A710EF /* libRNCWebView.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNCWebView.a;
-			remoteRef = 83B0528922CD7C8200A710EF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		83C3CD0F22C452280092B042 /* libjsi.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1642,7 +1612,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
